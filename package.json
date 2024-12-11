@@ -13,8 +13,11 @@
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
+    "@portabletext/react": "^3.2.0",
     "@remix-run/react": "^2.13.1",
     "@remix-run/server-runtime": "^2.13.1",
+    "@sanity/client": "^6.24.1",
+    "@sanity/image-url": "^1.1.0",
     "@shopify/hydrogen": "2024.10.0",
     "@shopify/remix-oxygen": "^2.0.9",
     "graphql": "^16.6.0",
