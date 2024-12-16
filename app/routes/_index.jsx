@@ -2,7 +2,7 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import CustomHomepage from '~/components/customHomepage';
+import CustomPosts from '~/components/CustomPosts';
 
 /**
  * @type {MetaFunction}
@@ -67,7 +67,7 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
-      <CustomHomepage/>
+      <CustomPosts/>
     </div>
   );
 }
