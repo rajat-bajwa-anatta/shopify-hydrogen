@@ -17,7 +17,15 @@ export default async function handleRequest(
   remixContext,
   context,
 ) {
+  const projectId = context.env.SANITY_PROJECT_ID;
+
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    defaultSrc: ['https://cdn.sanity.io', 'https://lh3.googleusercontent.com'],
+    connectSrc: [
+      `https://${projectId}.api.sanity.io`,
+      `wss://${projectId}.api.sanity.io`,
+    ],
+    frameAncestors: [`http://localhost:3333`, `'self'`],
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
