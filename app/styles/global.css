@@ -1,0 +1,38 @@
+.header-menu-item.nested-menu {
+  position: relative;
+}
+
+.header-menu-item.nested-menu:hover .submenu{
+  display: block;
+}
+
+.submenu {
+  position: absolute;
+  background-color: #fff;
+  padding: 8px 10px;
+  top: 26px;
+  left: 0px;
+  box-shadow: 2px 8px 5px #3b3b3b;
+  display: none;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero-content {
+  position: absolute;
+  top: 40%;
+  left: 6%;
+  color: #fff;
+}
+
+.hero-cta {
+  background-color: #FFF;
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 18px;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+}
