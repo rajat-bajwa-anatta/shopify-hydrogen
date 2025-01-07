@@ -13,9 +13,10 @@ import {
 import favicon from '~/assets/favicon.svg';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
+import globalCss from './styles/global.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
-
+import sanityClient from '~/sanity/client';
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
  * @type {ShouldRevalidateFunction}
@@ -39,6 +40,7 @@ export function links() {
   return [
     {rel: 'stylesheet', href: tailwindCss},
     {rel: 'stylesheet', href: appStyles},
+    {rel: 'stylesheet', href: globalCss},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
@@ -89,18 +91,27 @@ export async function loader(args) {
  */
 async function loadCriticalData({context}) {
   const {storefront} = context;
+  const sanitySettings = await sanityClient.fetch('*[_type == "settings"]');
+
+  const headerMenuHandle = sanitySettings?.[0]?.headerMenu || 'main-menu'; // Fallback to 'main-menu' if undefined
 
   const [header] = await Promise.all([
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+        headerMenuHandle,
       },
     }),
     // Add other queries here, so that they are loaded in parallel
   ]);
 
-  return {header};
+  // Combine header with additional values
+  const enrichedHeader = {
+    ...header,
+    sanitySettings: sanitySettings?.[0], // Include sanity settings data
+  };
+
+  return {header: enrichedHeader};
 }
 
 /**

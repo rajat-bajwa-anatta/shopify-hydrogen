@@ -149,19 +149,25 @@ button.reset:hover:not(:has(> *)) {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: #000;
   display: flex;
   height: var(--header-height);
   padding: 0 1rem;
   position: sticky;
   top: 0;
   z-index: 1;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .header-menu-mobile-toggle {
   @media (min-width: 48em) {
     display: none;
   }
+}
+
+.header-menu-mobile-toggle svg{
+  stroke: #fff;
 }
 
 .header-menu-mobile {
@@ -191,6 +197,21 @@ button.reset:hover:not(:has(> *)) {
   margin-left: auto;
 }
 
+
+.header-ctas a,
+.header-ctas button,
+.header-menu-desktop a{
+  color: #fff;
+}
+
+.header-logo{
+  margin-left: auto;
+}
+
+.header-logo img{
+  height: 46px;
+}
+
 /*
 * --------------------------------------------------
 * components/Footer
@@ -203,7 +224,7 @@ button.reset:hover:not(:has(> *)) {
 
 .footer-menu {
   align-items: center;
-  display: flex;
+  /* display: flex; */
   grid-gap: 1rem;
   padding: 1rem;
 }
