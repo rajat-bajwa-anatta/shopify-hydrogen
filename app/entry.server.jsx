@@ -25,7 +25,11 @@ export default async function handleRequest(
       `https://${projectId}.api.sanity.io`,
       `wss://${projectId}.api.sanity.io`,
     ],
-    frameAncestors: [`http://localhost:3333`, `'self'`],
+    frameAncestors: [
+      `http://localhost:3333`,
+      `'self'`,
+      'https://${projectId}.api.sanity.io',
+    ],
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,

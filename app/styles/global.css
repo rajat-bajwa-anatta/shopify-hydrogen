@@ -36,3 +36,46 @@
   display: block;
   text-align: center;
 }
+
+button {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #cfcfcf;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+button:not(:first-of-type){
+  margin-left: 20px;
+}
+
+button.isActive {
+  border-color: #000;
+}
+
+button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.variant-selector {
+  margin-top: 10px;
+}
+
+.thumbnail-slider{
+  margin-top: 30px;
+}
+
+.thumbnail-slider img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  aspect-ratio: 1;
+}
+
+.thumbnail-slider .swiper-slide-thumb-active img {
+  border-color: #007bff;
+}
+  

@@ -4,3 +4,18 @@
  */
 
 @import 'tailwindcss';
+
+.container{
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media screen and (min-width: 1024px) {
+  .container{
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}

@@ -16,6 +16,7 @@ import tailwindCss from './styles/tailwind.css?url';
 import globalCss from './styles/global.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
+import {CartProvider} from '@shopify/hydrogen-react';
 import sanityClient from '~/sanity/client';
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -179,7 +180,11 @@ export function Layout({children}) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <CartProvider>
+      <Outlet />
+    </CartProvider>
+  );
 }
 
 export function ErrorBoundary() {

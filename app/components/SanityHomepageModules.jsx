@@ -20,18 +20,22 @@ export default function SanityHomepageModules() {
         );
         setHomeModules(data.modules || []);
         setHeroComponent(data.hero || {});
-        console.log(heroComponent);
+
+        const modules = import.meta.glob('./*.jsx');
         const loadedComponents = {};
+
         for (const module of data.modules || []) {
           const componentName = formatComponentName(module._type);
-          loadedComponents[module._type] = await import(
-            /* @vite-ignore */ `./${componentName}.jsx`
-          )
-            .then((mod) => mod.default)
-            .catch((err) => {
-              console.error(`Error loading component ${componentName}:`, err);
-              return null;
-            });
+          const modulePath = `./${componentName}.jsx`;
+
+          if (modules[modulePath]) {
+            loadedComponents[module._type] = await modules[modulePath]()
+              .then((mod) => mod.default)
+              .catch((err) => {
+                console.error(`Error loading component ${componentName}:`, err);
+                return null;
+              });
+          }
         }
         setComponents(loadedComponents);
       } catch (error) {
@@ -48,10 +52,15 @@ export default function SanityHomepageModules() {
   return (
     <div className="sanity-homepage-modules">
       <div className="hero">
-        <img
-          className="hero-image"
-          src={sanityImage(heroComponent.content[0].image).url()}
-        />
+        {heroComponent?.content ? (
+          <img
+            className="hero-image"
+            src={sanityImage(heroComponent.content[0].image).url()}
+          />
+        ) : (
+          <p>Loading...</p> // Or placeholder image
+        )}
+
         <div className="hero-content">
           <h2 className="hero-title">{heroComponent.title}</h2>
           <p className="hero-subTitle">{heroComponent.description}</p>
@@ -63,7 +72,7 @@ export default function SanityHomepageModules() {
       {homeModules.map((module, index) => {
         const Component = components[module._type];
         return Component ? (
-          <Component key={index} {...module} />
+          <Component key={index} moduleData={module} />
         ) : (
           <div key={index}>Unknown Module: {module._type}</div>
         );
