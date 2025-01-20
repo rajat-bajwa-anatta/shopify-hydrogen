@@ -656,6 +656,27 @@ export type PoliciesQuery = {
   };
 };
 
+export type ProductQueryQueryVariables = StorefrontAPI.Exact<{
+  id: StorefrontAPI.Scalars['ID']['input'];
+}>;
+
+export type ProductQueryQuery = {
+  product?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Product, 'id' | 'title' | 'descriptionHtml'> & {
+      featuredImage?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'url' | 'altText'>
+      >;
+      variants: {
+        edges: Array<{
+          node: Pick<StorefrontAPI.ProductVariant, 'id' | 'title'> & {
+            price: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
+          };
+        }>;
+      };
+    }
+  >;
+};
+
 export type ProductVariantFragment = Pick<
   StorefrontAPI.ProductVariant,
   'availableForSale' | 'id' | 'sku' | 'title'
@@ -1154,6 +1175,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  fragment PolicyItem on ShopPolicy {\n    id\n    title\n    handle\n  }\n  query Policies ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      privacyPolicy {\n        ...PolicyItem\n      }\n      shippingPolicy {\n        ...PolicyItem\n      }\n      termsOfService {\n        ...PolicyItem\n      }\n      refundPolicy {\n        ...PolicyItem\n      }\n      subscriptionPolicy {\n        id\n        title\n        handle\n      }\n    }\n  }\n': {
     return: PoliciesQuery;
     variables: PoliciesQueryVariables;
+  };
+  '\n  query ProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      title\n      descriptionHtml\n      featuredImage {\n        url\n        altText\n      }\n      variants(first: 5) {\n        edges {\n          node {\n            id\n            title\n            price {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+    return: ProductQueryQuery;
+    variables: ProductQueryQueryVariables;
   };
   '#graphql\n  query Product(\n    $country: CountryCode\n    $handle: String!\n    $language: LanguageCode\n    $selectedOptions: [SelectedOptionInput!]!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...Product\n    }\n  }\n  #graphql\n  fragment Product on Product {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    options {\n      name\n      optionValues {\n        name\n      }\n    }\n    selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {\n      ...ProductVariant\n    }\n    variants(first: 1) {\n      nodes {\n        ...ProductVariant\n      }\n    }\n    seo {\n      description\n      title\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n  }\n\n\n': {
     return: ProductQuery;
