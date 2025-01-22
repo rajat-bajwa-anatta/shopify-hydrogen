@@ -10,7 +10,9 @@ export default function Accordion({moduleData}) {
 
   return (
     <section className="container">
-      Accordions FAQ
+      <h2 className="text-4xl font-bold dark:text-white text-center">
+        Accordions FAQ
+      </h2>
       {accordionData.map((item, index) => (
         <AccordionItem
           key={index}
