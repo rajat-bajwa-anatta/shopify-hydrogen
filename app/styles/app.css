@@ -204,6 +204,10 @@ button.reset:hover:not(:has(> *)) {
   color: #fff;
 }
 
+.nested-menu .submenu a{
+  color: #000;
+}
+
 .header-logo{
   margin-left: auto;
 }
