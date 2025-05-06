@@ -9,7 +9,9 @@ export default function FeaturedProduct({moduleData}) {
 
   return (
     <section className="container">
-      <h2 class="text-4xl font-bold dark:text-white text-center">{title}</h2>
+      <h2 className="text-4xl font-bold dark:text-white text-center">
+        {title}
+      </h2>
 
       {product ? (
         <div className="featured-product">
