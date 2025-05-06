@@ -9,7 +9,7 @@ export default function FeaturedProduct({moduleData}) {
 
   return (
     <section className="container">
-      <h2 className="text-4xl font-bold dark:text-white text-center">
+      <h2 className="text-4xl font-bold dark:text-white text-center font-black">
         {title}
       </h2>
 
